@@ -16,8 +16,6 @@ public enum Pessoa {
         return desc;
     }
 
-
-
     @Override
     public String toString() {
         return super.toString();

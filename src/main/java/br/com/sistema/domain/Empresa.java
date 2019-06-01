@@ -1,6 +1,6 @@
 package br.com.sistema.domain;
 
-import com.sun.istack.internal.NotNull;
+
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
