@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html  lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <title>Lista de Clientes</title>
+
+</head>
+
+<body>
+<header>
+    <!--<div class="container">-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/empresa/listar}">Clientes</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/empresa/listar}">Clientes </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="Novo Cliente">
+                        <a class="dropdown-item" th:href="@{/empresas/cadastro}">Novo Cliente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/empresa/listar}">Lista de Clientes</a>
+                    </div>
+                </li>
+
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled" href="#">Desativado</a>-->
+                <!--</li>-->
+            </ul>
+
+            <th:form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            </th:form>
+        </div>
+    </nav>
+    <!--</div> conteiner desfeito-->
+</header>
+
+
+<main>
+
+    <div>
+        <a class="btn btn-primary" style="margin-top: 10px;"  th:href="@{/empresa/cadastro}">Novo Cliente</a>
+        <h4>
+            Lista de Clientes
+        </h4>
+
+    </div>
+    <div th:if="${empresas != null}">
+
+
+        <div th:if="${mensagem != null}">
+            <div class="alert alert-info" role="alert">
+                <span th:text="${mensagem == null ?' ' : mensagem}">mensagem</span>
+            </div>
+        </div>
+
+        <table class="table table-hover table-bordered table-sm table-responsive-md text-center">
+
+            <thead class="thead-dark">
+            <tr>
+                <th class="d-none d-lg-none"  scope="col">Código</th>
+                <th scope="col">Razão Social</th>
+                <!--<th scope="col">Fantasia</th>-->
+                <th class ="d-none d-md-block d-xl-none" scope="col">Pessoa</th>
+                <th scope="col">Telefone</th>
+
+                <!--<th scope="col">Rua</th>-->
+                <!--<th scope="col">Número</th>-->
+                <!--<th scope="col">complemento</th>-->
+                <!--<th scope="col">CEP</th>-->
+                <!--<th scope="col">Bairro</th>-->
+                <!--<th scope="col">Estado</th>-->
+                <!--<th scope="col">Municipio</th>-->
+
+                <th scope="col">CNPJ</th>
+                <th scope="col">Inscrição Estadual</th>
+                <!--<th scope="col">Tipo de IE</th>-->
+                <th scope="col">Cadastro</th>
+                <!--<th scope="col">Atualização</th>-->
+                <th scope="col">Ativo</th>
+                <th scope="col">Ação</th>
+            </tr>
+            </thead>
+
+            <tr th:each="empresa : ${empresas}" >
+
+                <td class="d-none d-lg-none"   th:text="${empresa.id}">Codigo</td>
+                <td data-toggle="modal" th:attr="data-target='#modalExemplo'+${empresa.id}" th:text="${empresa.nome}"></td>
+
+
+                <!--th:href="@{/empresa/{empresaid}/atualizar(empresaid=${empresa.id})}"-->
+
+                <!--<td th:text="${empresa.fantasia}">Fantasia</td>-->
+                <td class ="d-none d-md-block d-xl-none"  th:text="${empresa.pessoa}">Pessoa</td>
+                <td th:text="${empresa.fone}">Telefone</td>
+
+                <!--<td th:text="${empresa.rua}">Rua</td>-->
+                <!--<td th:text="${empresa.numero}">Número</td>-->
+                <!--<td th:text="${empresa.complemento}">complemento</td>-->
+                <!--<td th:text="${empresa.cep}">CEP</td>-->
+                <!--<td th:text="${empresa.bairro}">Bairro</td>-->
+                <!--<td th:text="${empresa.estado.nome}">Estado</td>-->
+                <!--&lt;!&ndash;<td th:text="${empresa.municipio.cidade}">Municipio</td>&ndash;&gt;-->
+                <td th:text="${empresa.cnpj}">CNPJ</td>
+                <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>
+                <!--<td th:text="${empresa.tipoIscricao}">Tipo de IE</td>-->
+                <td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>
+                <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
+                <td th:text="${empresa.ativo}">Ativo</td>
+                <td>
+                    <a class="btn btn-xl btn-info" style="padding:3 30px;" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
+                    <a class="btn btn-xl btn-danger" style="padding:3 30px;" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Excluir</a>
+                </td>
+                <!-- Modal -->
+
+                <div class="modal fade" th:id="modalExemplo +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                  <form >  <!---->
+                                    <div class="row">
+
+                                        <div class="form-group col-md-4">
+                                            <label th:for="cliente">Cliente: </label>
+                                            <label th:for="nome" th:text="${empresa.nome}"> </label>
+
+
+
+                                            <!--<input class="form-control" id="campo" type="text" th:text="${empresa.nome}" />-->
+                                            <!--<input class="form-control" id="empresaiD" type="text" th:field="*{id}"/>-->
+                                            <!--<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>-->
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--<td th:text="${empresa.nome}"></td>-->
+                            </div>
+                            <div class="modal-footer">
+                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--FIM DI MODAL-->
+
+            </tr>
+        </table>
+    </div>
+
+
+
+
+
+
+
+    <div th:if="${#lists.isEmpty(empresas)}">
+        <div class="alert alert-info" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>
+            0 Empresas cadastradas!
+        </div>
+    </div>
+
+    <hr/>
+    <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
+</main>
+
+<hr/>
+<footer class="footer">
+    <p>© 2019 ScriptMasterWeb.com</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+
+</body>
+</html>

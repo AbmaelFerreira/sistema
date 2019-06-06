@@ -4,10 +4,16 @@ package br.com.sistema.domain;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.Calendar;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,6 +21,7 @@ import java.util.Objects;
 public class Empresa implements Serializable {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private  Long id;
 
     @Column(nullable = false, length = 40)
@@ -49,33 +56,37 @@ public class Empresa implements Serializable {
     @Column
     private String bairro;
 
-    @ManyToOne //Leitura Muitos Empresas para 1 estado
-    @JoinColumn(name = "estado")
-    private Estado estado;
 
-    @ManyToOne //Leitura Muitos Empresas para 1 municipio
-    @JoinColumn(name = "municipio")
-    private Municipio municipio;
+
+  @ManyToOne //Leitura Muitos Empresas para 1 estado
+  @JoinColumn(name = "estado")
+  private Estado estado;
+
+//   @ManyToOne //Leitura Muitos Empresas para 1 municipio
+//   @JoinColumn(name = "municipio_id")
+//   private Municipio municipio;
 
     @Column
     private String cnpj;
 
-    @Column
+    @Column(name ="ie")
     private String inscricaoEstadual;
 
-    @Column
+    @Column(name = "tipo_IE")
     private String tipoIscricao;
 
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "data_cadastro")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @NotNull(message = "Informe a data do agendamento")
     private Calendar dataCadastro;
 
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "data_atualiza")
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @NotNull(message = "Informe a data do agendamento")
     private Calendar dataAtualizacao;
 
-    @Column
-    private boolean ativo;
+    @Column(name="situacao")
+    private int ativo;
 
     public Long getId() {
         return id;
@@ -165,13 +176,13 @@ public class Empresa implements Serializable {
         this.estado = estado;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
-    }
+//    public Municipio getMunicipio() {
+//        return municipio;
+//    }
 
-    public void setMunicipio(Municipio municipio) {
-        this.municipio = municipio;
-    }
+//    public void setMunicipio(Municipio municipio) {
+//        this.municipio = municipio;
+//    }
 
     public String getCnpj() {
         return cnpj;
@@ -213,27 +224,14 @@ public class Empresa implements Serializable {
         this.dataAtualizacao = dataAtualizacao;
     }
 
-    public boolean isAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Empresa)) return false;
-        Empresa empresa = (Empresa) o;
-        return isAtivo() == empresa.isAtivo() &&
-                Objects.equals(getId(), empresa.getId()) &&
-                Objects.equals(getCnpj(), empresa.getCnpj()) &&
-                Objects.equals(getInscricaoEstadual(), empresa.getInscricaoEstadual()) &&
-                Objects.equals(getTipoIscricao(), empresa.getTipoIscricao()) &&
-                Objects.equals(getDataCadastro(), empresa.getDataCadastro()) &&
-                Objects.equals(getDataAtualizacao(), empresa.getDataAtualizacao());
-    }
 
     @Override
     public int hashCode() {
