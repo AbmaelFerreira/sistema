@@ -84,5 +84,22 @@ ALTER TABLE `sistema`.`estado`
 DROP COLUMN `empresa`,
 DROP INDEX `empresa_id_idx` ;
 
+INSERT INTO `sistema`.`empresa` (`id`, `nome`, `fantasia`, `pessoa`, `fone`, `rua`, `numero`, `complemento`, `cep`, `bairro`, `estado`, `municipio_id`, `cnpj`, `ie`, `tipo_IE`, `data_cadastro`, `data_atualiza`, `situacao`) VALUES ('3', 'Adm', 'adm', 'FISICA', '65992250724', 'Joaquim de Figueiredo', '2', '1', '78120460', 'Jd Maringa 2', '11', '1', '034567788945', '45612378', '1', '2019-05-01', '2019-05-01', '1');
+
+
+-- Alterando o campo municipio_id para municipio
+ALTER TABLE `sistema`.`empresa` 
+DROP FOREIGN KEY `empresa_ibfk_2`;
+ALTER TABLE `sistema`.`empresa` 
+CHANGE COLUMN `municipio_id` `municipio` INT(11) NULL DEFAULT NULL ;
+ALTER TABLE `sistema`.`empresa` 
+ADD CONSTRAINT `empresa_ibfk_2`
+  FOREIGN KEY (`municipio`)
+  REFERENCES `sistema`.`municipio` (`id`);
+  
+  -- Alterando o campo estado_id para estado 
+  
+  ALTER TABLE `sistema`.`municipio` 
+CHANGE COLUMN `estado_id` `estado` INT(11) NOT NULL ;
 
    

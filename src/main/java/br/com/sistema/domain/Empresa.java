@@ -62,9 +62,9 @@ public class Empresa implements Serializable {
   @JoinColumn(name = "estado")
   private Estado estado;
 
-//   @ManyToOne //Leitura Muitos Empresas para 1 municipio
-//   @JoinColumn(name = "municipio_id")
-//   private Municipio municipio;
+   @ManyToOne //Leitura Muitos Empresas para 1 municipio
+   @JoinColumn(name = "municipio")
+   private Municipio municipio;
 
     @Column
     private String cnpj;
@@ -176,13 +176,13 @@ public class Empresa implements Serializable {
         this.estado = estado;
     }
 
-//    public Municipio getMunicipio() {
-//        return municipio;
-//    }
+    public Municipio getMunicipio() {
+        return municipio;
+    }
 
-//    public void setMunicipio(Municipio municipio) {
-//        this.municipio = municipio;
-//    }
+    public void setMunicipio(Municipio municipio) {
+        this.municipio = municipio;
+    }
 
     public String getCnpj() {
         return cnpj;
@@ -236,5 +236,12 @@ public class Empresa implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Empresa{" +
+                "id=" + id +
+                '}';
     }
 }

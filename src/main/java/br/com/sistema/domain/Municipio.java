@@ -8,8 +8,8 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-//@Entity
-//@Table(name="municipio")
+@Entity
+@Table(name="municipio")
 public class Municipio  implements Serializable {
 
 
@@ -19,10 +19,17 @@ public class Municipio  implements Serializable {
 
     @Column(nullable = false, length = 40)
     @NotBlank(message = "Favor informar um minicipio")
-    private String cidade;
+    private String nome;
 
-    @OneToMany(mappedBy = "estado_id", cascade = CascadeType.ALL)
-    private List<Estado> estado;
+    @Column(nullable = false, length = 40)
+    @NotBlank(message = "Favor informar um Estado")
+    private int estado;
+
+    @OneToMany(mappedBy = "municipio", cascade = CascadeType.ALL)
+    private List<Empresa> empresa;
+
+//    @OneToMany(mappedBy = "estado_id", cascade = CascadeType.ALL)
+//    private List<Estado> estado;
 
     public int getId() {
         return id;
@@ -32,21 +39,37 @@ public class Municipio  implements Serializable {
         this.id = id;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public List<Estado> getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(List<Estado> estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
+
+    public List<Empresa> getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(List<Empresa> empresa) {
+        this.empresa = empresa;
+    }
+
+    //    public List<Estado> getEstado() {
+//        return estado;
+//    }
+//
+//    public void setEstado(List<Estado> estado) {
+//        this.estado = estado;
+//    }
 
     @Override
     public boolean equals(Object o) {
