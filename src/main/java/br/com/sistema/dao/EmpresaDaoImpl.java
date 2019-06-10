@@ -1,6 +1,8 @@
 package br.com.sistema.dao;
 
 import br.com.sistema.domain.Empresa;
+import br.com.sistema.domain.Estado;
+import br.com.sistema.domain.Municipio;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -37,4 +39,15 @@ public class EmpresaDaoImpl implements EmpresaDao {
     public List<Empresa> recuperar() {
         return em.createQuery("select  e from Empresa e", Empresa.class).getResultList();
     }
+
+    @Override
+    public List<Estado> recuperarEstado() {
+        return em.createQuery("select a from Estado a", Estado.class).getResultList();
+    }
+
+    @Override
+    public List<Municipio> recuperarMunicipio() {
+        return em.createQuery("select m from Municipio m", Municipio.class).getResultList();
+    }
+
 }

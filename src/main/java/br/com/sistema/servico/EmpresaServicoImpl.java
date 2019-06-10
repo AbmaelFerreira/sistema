@@ -2,6 +2,8 @@ package br.com.sistema.servico;
 
 import br.com.sistema.dao.EmpresaDao;
 import br.com.sistema.domain.Empresa;
+import br.com.sistema.domain.Estado;
+import br.com.sistema.domain.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -39,5 +41,15 @@ public class EmpresaServicoImpl implements  EmpresaServico {
     @Transactional(readOnly = true)
     public List<Empresa> recuperar() {
         return empresaDao.recuperar();
+    }
+
+    @Override
+    public List<Estado> recuperarEstado() {
+        return empresaDao.recuperarEstado();
+    }
+
+    @Override
+    public List<Municipio> recuperarMunicipio() {
+        return empresaDao.recuperarMunicipio();
     }
 }

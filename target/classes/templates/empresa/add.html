@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html  lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <title>Cadastro de Empresa</title>
+</head>
+
+<body>
+<header>
+    <!--<div class="container">-->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/empresa/listar}">Empresas </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/empresa/listar}">Clientes </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Clientes
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="Novo Clientes">
+                        <a class="dropdown-item" th:href="@{/empresa/cadastro}">Novo Cliente</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/empresa/listar}">Lista de Cliente</a>
+                    </div>
+                </li>
+
+                <!--<li class="nav-item">-->
+                <!--<a class="nav-link disabled" href="#">Desativado</a>-->
+                <!--</li>-->
+            </ul>
+
+            <th:form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
+            </th:form>
+        </div>
+    </nav>
+    <!--</div> conteiner desfeito-->
+</header>
+
+<main>
+    <hr/>
+    <div class="container">
+            <h4>
+                Novo Cliente
+            </h4>
+            <hr/>
+        <th:form th:action="@{/empresa/salvar}" th:method="${empresa.id} == 0 ? post : put" th:object="${empresa}">
+            <fieldset>
+                <legend>Cadastro</legend>
+                <div class="row">
+
+                    <input id="id" type="hidden" th:field="*{id}"/>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Nome:</label>
+                        <input class="form-control" id="nome" type="text" th:field="*{nome}"/>
+                        <div th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Fantasia:</label>
+                        <input class="form-control" id="fantasia" type="text" th:field="*{fantasia}"/>
+                        <div th:if="${#fields.hasErrors('fantasia')}" th:errors="*{fantasia}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="pessoa">Pessoa: </label>
+                        <select th:field="*{pessoa}" class="form-control" id="pessoa" >
+                            <option th:each="pessoa : ${pessoas}" th:value="${pessoa.desc}" th:text="${pessoa.desc}" >F</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Fone:</label>
+                        <input class="form-control" id="fone" type="text" th:field="*{fone}"/>
+                        <div th:if="${#fields.hasErrors('fone')}"
+                             th:errors="*{fone}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Rua:</label>
+                        <input class="form-control" id="rua" type="text" th:field="*{rua}"/>
+                        <div th:if="${#fields.hasErrors('rua')}"
+                             th:errors="*{rua}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Número:</label>
+                        <input class="form-control" id="numero" type="text" th:field="*{numero}"/>
+                        <div th:if="${#fields.hasErrors('numero')}"
+                             th:errors="*{numero}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Complemento:</label>
+                        <input class="form-control" id="complemento" type="text" th:field="*{complemento}"/>
+                        <div th:if="${#fields.hasErrors('complemento')}"
+                             th:errors="*{complemento}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">CEP:</label>
+                        <input class="form-control" id="cep" type="text" th:field="*{cep}"/>
+                        <div th:if="${#fields.hasErrors('cep')}"
+                             th:errors="*{cep}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Bairro:</label>
+                        <input class="form-control" id="bairro" type="text" th:field="*{bairro}"/>
+                        <div th:if="${#fields.hasErrors('bairro')}"
+                             th:errors="*{bairro}">
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group col-md-4">
+                        <label th:for="estadoid">Estados: </label>
+                        <select   th:field="*{estado.id}"  class="form-control" id="estadoid" >
+                            <option  th:each="estado : ${estados}"  th:value= "${estado.id}"  th:text="${estado.nome}">Estado</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label th:for="municipioid">Municipios: </label>
+                        <select   th:field="*{municipio.id}"  class="form-control" id="municipioid" >
+                            <option  th:each="municipio : ${municipios}"  th:value= "${municipio.id}"  th:text="${municipio.nome}" >Municipio</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label th:for="cnpj">CNPJ:</label>
+                        <input class="form-control" id="cnpj" type="text" th:field="*{cnpj}"/>
+                        <div th:if="${#fields.hasErrors('cnpj')}"
+                             th:errors="*{cnpj}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">I.E:</label>
+                        <input class="form-control" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
+                        <div th:if="${#fields.hasErrors('inscricaoEstadual')}"
+                             th:errors="*{inscricaoEstadual}">
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label for="nome">Tipo Inscricao:</label>
+                        <input class="form-control" id="tipoIscricao" type="text" th:field="*{tipoIscricao}"/>
+                        <div th:if="${#fields.hasErrors('tipoIscricao')}"
+                             th:errors="*{tipoIscricao}">
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="form-group col-md-8"><label  th:for="data">Data Cadastro:</label><input  class="form-control" id="dataCadastro" type="date" th:field="*{dataCadastro}"/><span th:if="${#fields.hasErrors('dataCadastro')}" th:errors="*{dataCadastro}" class="label label-danger"></span></div><div class="form-group col-md-8"><label type="hidden" th:for="data">Data Atualização:</label><input type="hidden" class="form-control" id="dataAtualizacao" type="date" th:field="*{dataAtualizacao}"/>                <span th:if="${#fields.hasErrors('dataAtualizacao')}" th:errors="*{dataAtualizacao}" class="label label-danger"></span>  </div>     -->
+
+
+
+                    <div class="form-group col-md-4">
+                        <label for="nome">Ativo:</label>
+                            <select   th:field="*{municipio.id}"  class="form-control" id="ativo" >
+                                <option  th:value = "0"  th:text="NÃO">NÃO</option>
+                                <option  th:value = "1"  th:text="SIM">SIM</option>
+                            </select>
+                        <div th:if="${#fields.hasErrors('ativo')}" th:errors="*{ativo}">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <button class="btn btn-primary" type="submit">Salvar</button>
+                    </div>
+
+                </div>
+                </fieldset>
+
+        </th:form>
+            <hr/>
+
+            <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
+
+            <hr/>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2018 Script Master</p>
+</footer>
+
+
+</body>
+</html>
