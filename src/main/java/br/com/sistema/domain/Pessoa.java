@@ -1,7 +1,7 @@
 package br.com.sistema.domain;
 
 public enum Pessoa {
-    JURIDICA("Jurídica"), FISICA("Física");
+    JURIDICA("Juridica"), FISICA("Fisica");
 
     private String desc;
 

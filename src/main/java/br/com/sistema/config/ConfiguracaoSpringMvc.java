@@ -1,9 +1,12 @@
 package br.com.sistema.config;
 
 
+import br.com.sistema.converter.PessoaConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -26,9 +29,29 @@ public class ConfiguracaoSpringMvc  extends WebMvcConfigurerAdapter {
         registry.addViewController("/home").setViewName("home");
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(
+
+                "/img/**",
+                "/css/**",
+                "/js/**")
+                .addResourceLocations(
+
+                        "classpath:/static/img/",
+                        "classpath:/static/css/",
+                        "classpath:/static/js/");
+    }
+
     protected Filter[] getSerFilters(){
 
         return new Filter[] {new OpenEntityManagerInViewFilter()};
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+
+        registry.addConverter(new PessoaConverter());
     }
 
 }

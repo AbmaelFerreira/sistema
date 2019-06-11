@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
 
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" media="all"  href="/css/style.css" />
+
     <title>Lista de Clientes</title>
 
 </head>
@@ -63,8 +64,8 @@
 <main>
 
     <div>
-        <a class="btn btn-primary" style="margin-top: 10px;"  th:href="@{/empresa/cadastro}">Novo Cliente</a>
-        <h4>
+        <a class="btn btn-primary"   th:href="@{/empresa/cadastro}">Novo Cliente</a>
+        <h4 class="text-field text-center">
             Lista de Clientes
         </h4>
 
@@ -78,12 +79,12 @@
             </div>
         </div>
 
-        <table class="table table-hover table-bordered table-sm table-responsive-md text-center">
+        <table class="table table-hover table-bordered table-sm table-responsive-md text-center table-color">
 
             <thead class="thead-dark">
             <tr>
                 <th class="d-none d-lg-none"  scope="col">Código</th>
-                <th scope="col">Razão Social</th>
+                <th class="table-color" scope="col">Razão Social</th>
                 <!--<th scope="col">Fantasia</th>-->
                 <th class ="d-none d-md-block d-xl-none" scope="col">Pessoa</th>
                 <th scope="col">Telefone</th>
@@ -128,7 +129,8 @@
                 <td th:text="${empresa.cnpj}">CNPJ</td>
                 <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>
                 <!--<td th:text="${empresa.tipoIscricao}">Tipo de IE</td>-->
-                <td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>
+                <!--<td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>-->
+                <td th:text="${empresa.dataCadastro}">Cadastro</td>
                 <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
                 <td th:text="${empresa.ativo}">Ativo</td>
                 <td>

@@ -43,8 +43,11 @@ public class EmpresaController {
         return Pessoa.values();
     }
 
+
+
     @PostMapping("/salvar")
     public String salvar(@Valid @ModelAttribute("empresaCadastrada") Empresa empresaCadastrada, BindingResult result, RedirectAttributes attr){
+
         if (result.hasErrors()){
             return  "/empresa/add";
         }
@@ -52,6 +55,17 @@ public class EmpresaController {
         attr.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso");
         return  "redirect:/empresa/listaEmpresa";
     }
+
+    @PutMapping("/salvar")
+    public String atualizar(@Valid @ModelAttribute("empresa") Empresa empresa, BindingResult result, RedirectAttributes attr){
+        if (result.hasErrors()){
+            return  "/empresa/add";
+        }
+        empresaServico.atualizar(empresa);
+        attr.addFlashAttribute("mensagem", "Cliente atualizado com sucesso");
+        return  "redirect:/empresa/listar";
+    }
+
 
 
 

@@ -4,21 +4,23 @@ body {
 
 }
 
+
 h4{
+  
   font-family:"Calibri Light";
-  color: cadetblue;
-  font-size: 18px;
+  color:#1b1e21;
+  font-size: 50px;
   text-align: center;
 }
 
 .table{
   font-family:Arial;
   font-size: 15px;
+
 }
-.jumbotronh1{
-  padding: 50px;
-}
+
 form{
   margin: 15px;
+  color: red;
 
 }

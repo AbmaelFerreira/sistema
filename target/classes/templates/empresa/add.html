@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
 
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+
+
+
     <title>Cadastro de Empresa</title>
 </head>
 
@@ -29,7 +32,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/empresa/listar}">Clientes </a>
+                    <a class="nav-link abm" th:href="@{/empresa/listar}">Clientes </a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -60,21 +63,20 @@
 
 <main>
     <hr/>
-    <div class="container">
-            <h4>
-                Novo Cliente
-            </h4>
-            <hr/>
-        <th:form th:action="@{/empresa/salvar}" th:method="${empresa.id} == 0 ? post : put" th:object="${empresa}">
-            <fieldset>
-                <legend>Cadastro</legend>
-                <div class="row">
+    <div >
+            <!--<h4 class=" text-light bg-dark"> Novo Cliente </h4><hr/>-->
+        <form th:action="@{/empresa/salvar}" th:method="${empresa.id} == 0 ? post : put" th:object="${empresa}">
+            <fieldset class="text-field border rounded p-3" >
+                <legend class="">Cadastro</legend>
+
+
+            <div class="row p-2">
 
                     <input id="id" type="hidden" th:field="*{id}"/>
 
                     <div class="form-group col-md-4">
 
-                        <label for="nome">Nome:</label>
+                        <label class="abm" for="nome">Nome:</label>
                         <input class="form-control" id="nome" type="text" th:field="*{nome}"/>
                         <div th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}">
 
@@ -100,10 +102,10 @@
 
                     <div class="form-group col-md-4">
 
-                        <label for="nome">Fone:</label>
-                        <input class="form-control" id="fone" type="text" th:field="*{fone}"/>
+                        <label for="telefone">Fone:</label>
+                        <input size="20" class="form-control p-2" data-mask="(00) 00000-0000" placeholder="Telefone" name="telefone" id="telefone" type="text" th:field="*{fone}"/>
                         <div th:if="${#fields.hasErrors('fone')}"
-                             th:errors="*{fone}">
+                                 th:errors="*{fone}">
 
                         </div>
                     </div>
@@ -177,7 +179,7 @@
                     <div class="form-group col-md-4">
 
                         <label th:for="cnpj">CNPJ:</label>
-                        <input class="form-control" id="cnpj" type="text" th:field="*{cnpj}"/>
+                        <input class="form-control" data-mask="00.000.000/-0000-00" id="cnpj" th:name="cnpj" type="text" th:field="*{cnpj}"/>
                         <div th:if="${#fields.hasErrors('cnpj')}"
                              th:errors="*{cnpj}">
 
@@ -187,7 +189,7 @@
                     <div class="form-group col-md-4">
 
                         <label for="nome">I.E:</label>
-                        <input class="form-control" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
+                        <input class="form-control" data-mask="00.0000.000-0" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
                         <div th:if="${#fields.hasErrors('inscricaoEstadual')}"
                              th:errors="*{inscricaoEstadual}">
 
@@ -204,7 +206,12 @@
                         </div>
                     </div>
 
-                    <!-- <div class="form-group col-md-8"><label  th:for="data">Data Cadastro:</label><input  class="form-control" id="dataCadastro" type="date" th:field="*{dataCadastro}"/><span th:if="${#fields.hasErrors('dataCadastro')}" th:errors="*{dataCadastro}" class="label label-danger"></span></div><div class="form-group col-md-8"><label type="hidden" th:for="data">Data Atualização:</label><input type="hidden" class="form-control" id="dataAtualizacao" type="date" th:field="*{dataAtualizacao}"/>                <span th:if="${#fields.hasErrors('dataAtualizacao')}" th:errors="*{dataAtualizacao}" class="label label-danger"></span>  </div>     -->
+                <!-- <div class="form-group col-md-8 hidden-lg-down">
+                     <label  th:for="data">Data Cadastro:</label>
+                     <input  class="form-control" id="dataCadastro"  type="date" th:field="*{dataCadastro}"/>
+                     <span th:if="${#fields.hasErrors('dataCadastro')}" th:errors="*{dataCadastro}" class="label label-danger"></span>
+                 </div>
+                <div class="form-group col-md-8"><label type="hidden" th:for="data">Data Atualização:</label><input type="hidden" class="form-control" id="dataAtualizacao" type="date" th:field="*{dataAtualizacao}"/>                <span th:if="${#fields.hasErrors('dataAtualizacao')}" th:errors="*{dataAtualizacao}" class="label label-danger"></span>  </div>     -->
 
 
 
@@ -225,7 +232,7 @@
                 </div>
                 </fieldset>
 
-        </th:form>
+        </form>
             <hr/>
 
             <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
@@ -237,6 +244,15 @@
 <footer class="footer">
     <p>© 2018 Script Master</p>
 </footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="/js/jquery.mask.js"></script>
+
+
+
+
 
 
 </body>

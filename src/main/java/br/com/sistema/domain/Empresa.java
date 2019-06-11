@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import java.util.List;
@@ -75,18 +76,30 @@ public class Empresa implements Serializable {
     @Column(name = "tipo_IE")
     private String tipoIscricao;
 
-    //@DateTimeFormat(pattern="yyyy-MM-dd")
+    /*@DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "data_cadastro")
     @NotNull(message = "Informe a data do agendamento")
     private Calendar dataCadastro;
+*/
+    //@DateTimeFormat(pattern="yyyy-MM-dd")
+    @Column(name = "data_cadastro")
+    @NotNull(message = "Informe a data do agendamento")
+    private LocalDate dataCadastro = LocalDate.now();
+
 
     //@DateTimeFormat(pattern="yyyy-MM-dd")
     @Column(name = "data_atualiza")
     @NotNull(message = "Informe a data do agendamento")
-    private Calendar dataAtualizacao;
+      private LocalDate dataAtualizacao = LocalDate.now();
 
     @Column(name="situacao")
     private int ativo;
+
+
+    //Metodos particulares
+
+
+    //Gettes and Settes
 
     public Long getId() {
         return id;
@@ -208,19 +221,19 @@ public class Empresa implements Serializable {
         this.tipoIscricao = tipoIscricao;
     }
 
-    public Calendar getDataCadastro() {
+    public LocalDate getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Calendar dataCadastro) {
+    public void setDataCadastro(LocalDate dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
 
-    public Calendar getDataAtualizacao() {
+    public LocalDate getDataAtualizacao() {
         return dataAtualizacao;
     }
 
-    public void setDataAtualizacao(Calendar dataAtualizacao) {
+    public void setDataAtualizacao(LocalDate dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
     }
 

@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface EmpresaServico {
 
-    void salvar(Empresa paciente);
-    void atualizar(Empresa paciente);
+    void salvar(Empresa empresa);
+    void atualizar(Empresa empresa);
     void excluir (long id);
     Empresa recuperarPorId(long id);
     List<Empresa> recuperar();
