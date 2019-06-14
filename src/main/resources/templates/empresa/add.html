@@ -4,22 +4,23 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
+    <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+
 
 
 
     <title>Cadastro de Empresa</title>
 </head>
 
+
 <body>
 <header>
     <!--<div class="container">-->
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/empresa/listar}">Empresas </a>
+        <a class="navbar-brand" th:href="@{/empresa/listar}">Clientes </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,10 +30,6 @@
 
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link abm" th:href="@{/empresa/listar}">Clientes </a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -63,98 +60,105 @@
 
 <main>
     <hr/>
-    <div >
+    <div class="container col-md-auto">
             <!--<h4 class=" text-light bg-dark"> Novo Cliente </h4><hr/>-->
-        <form th:action="@{/empresa/salvar}" th:method="${empresa.id} == 0 ? post : put" th:object="${empresa}">
-            <fieldset class="text-field border rounded p-3" >
-                <legend class="">Cadastro</legend>
+        <form th:action="@{/empresa/salvar}" th:method="${empresa.id} == null ? post : put" th:object="${empresa}">
+            <input id="id" type="hidden" th:field="*{id}"/>
+            <fieldset  class="border-dark p-3"  style="border: solid 1px;">
+               <legend class="p-2">Cadastro</legend>
+
+                <div class="row"><!--Primeira Linha-->
 
 
-            <div class="row p-2">
 
-                    <input id="id" type="hidden" th:field="*{id}"/>
+                    <div class="form-group col-sm-10 ">
 
-                    <div class="form-group col-md-4">
+                        <label for="nome">Razão Social:</label>
+                        <input class="form-control s" id="nome" type="text" th:field="*{nome}"/>
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}"></div>
 
-                        <label class="abm" for="nome">Nome:</label>
-                        <input class="form-control" id="nome" type="text" th:field="*{nome}"/>
-                        <div th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}">
-
-                        </div>
                     </div>
 
-                    <div class="form-group col-md-4">
-
-                        <label for="nome">Fantasia:</label>
-                        <input class="form-control" id="fantasia" type="text" th:field="*{fantasia}"/>
-                        <div th:if="${#fields.hasErrors('fantasia')}" th:errors="*{fantasia}">
-
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label th:for="pessoa">Pessoa: </label>
+                    <div class="form-group col-md-2">
+                        <label for="pessoa">Pessoa: </label>
                         <select th:field="*{pessoa}" class="form-control" id="pessoa" >
                             <option th:each="pessoa : ${pessoas}" th:value="${pessoa.desc}" th:text="${pessoa.desc}" >F</option>
 
                         </select>
                     </div>
+                </div><!-- Primeira Linha-->
 
-                    <div class="form-group col-md-4">
 
-                        <label for="telefone">Fone:</label>
-                        <input size="20" class="form-control p-2" data-mask="(00) 00000-0000" placeholder="Telefone" name="telefone" id="telefone" type="text" th:field="*{fone}"/>
-                        <div th:if="${#fields.hasErrors('fone')}"
-                                 th:errors="*{fone}">
+                <div class="row"> <!--Segunda Linha -->
+
+                    <div class="form-group col-sm-10">
+
+                        <label for="nome">Fantasia:</label>
+                        <input class="form-control" id="fantasia" type="text" th:field="*{fantasia}"/>
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('fantasia')}" th:errors="*{fantasia}">
 
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
 
-                        <label for="nome">Rua:</label>
+                        <label for="telefone">Fone:</label>
+                        <input  class="form-control"  style="min-width:100px;"  data-mask="(00) 00000-0000" placeholder="Telefone" name="telefone" id="telefone" type="text" th:field="*{fone}"/>
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('fone')}" th:errors="*{fone}"> </div>
+                    </div>
+
+
+                </div><!--Segunda Linha -->
+
+
+
+                <div class="row"> <!--Terceira Linha -->
+
+                    <div class="form-group col-sm-8">
+
+                        <label for="rua">Rua:</label>
                         <input class="form-control" id="rua" type="text" th:field="*{rua}"/>
-                        <div th:if="${#fields.hasErrors('rua')}"
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('rua')}"
                              th:errors="*{rua}">
 
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-1">
 
-                        <label for="nome">Número:</label>
+                        <label for="numero">Número:</label>
                         <input class="form-control" id="numero" type="text" th:field="*{numero}"/>
-                        <div th:if="${#fields.hasErrors('numero')}"
-                             th:errors="*{numero}">
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('numero')}" th:errors="*{numero}"> </div>
 
-                        </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-1">
 
                         <label for="nome">Complemento:</label>
                         <input class="form-control" id="complemento" type="text" th:field="*{complemento}"/>
-                        <div th:if="${#fields.hasErrors('complemento')}"
-                             th:errors="*{complemento}">
-
-                        </div>
+                        <div  class="alert alert-info" role="alert" th:if="${#fields.hasErrors('complemento')}" th:errors="*{complemento}"> </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
 
                         <label for="nome">CEP:</label>
                         <input class="form-control" id="cep" type="text" th:field="*{cep}"/>
-                        <div th:if="${#fields.hasErrors('cep')}"
-                             th:errors="*{cep}">
-
-                        </div>
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"></div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                </div><!--Terceira Linha-->
+
+
+                <div class="row"> <!--Quarta Linha -->
+
+
+
+
+                    <div class="form-group-lg col-md-6">
 
                         <label for="nome">Bairro:</label>
                         <input class="form-control" id="bairro" type="text" th:field="*{bairro}"/>
-                        <div th:if="${#fields.hasErrors('bairro')}"
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('bairro')}"
                              th:errors="*{bairro}">
 
                         </div>
@@ -162,31 +166,40 @@
 
 
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <label th:for="estadoid">Estados: </label>
                         <select   th:field="*{estado.id}"  class="form-control" id="estadoid" >
                             <option  th:each="estado : ${estados}"  th:value= "${estado.id}"  th:text="${estado.nome}">Estado</option>
                         </select>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <label th:for="municipioid">Municipios: </label>
                         <select   th:field="*{municipio.id}"  class="form-control" id="municipioid" >
                             <option  th:each="municipio : ${municipios}"  th:value= "${municipio.id}"  th:text="${municipio.nome}" >Municipio</option>
                         </select>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
 
                         <label th:for="cnpj">CNPJ:</label>
                         <input class="form-control" data-mask="00.000.000/-0000-00" id="cnpj" th:name="cnpj" type="text" th:field="*{cnpj}"/>
-                        <div th:if="${#fields.hasErrors('cnpj')}"
+                        <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('cnpj')}"
                              th:errors="*{cnpj}">
 
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                </div><!--Quarta  Linha-->
+
+
+                <div class="row"> <!--Quinta Linha-->
+
+
+
+
+
+                    <div class="form-group col-md-2">
 
                         <label for="nome">I.E:</label>
                         <input class="form-control" data-mask="00.0000.000-0" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
@@ -196,7 +209,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-xs-2">
 
                         <label for="nome">Tipo Inscricao:</label>
                         <input class="form-control" id="tipoIscricao" type="text" th:field="*{tipoIscricao}"/>
@@ -206,38 +219,36 @@
                         </div>
                     </div>
 
-                <!-- <div class="form-group col-md-8 hidden-lg-down">
-                     <label  th:for="data">Data Cadastro:</label>
-                     <input  class="form-control" id="dataCadastro"  type="date" th:field="*{dataCadastro}"/>
-                     <span th:if="${#fields.hasErrors('dataCadastro')}" th:errors="*{dataCadastro}" class="label label-danger"></span>
-                 </div>
-                <div class="form-group col-md-8"><label type="hidden" th:for="data">Data Atualização:</label><input type="hidden" class="form-control" id="dataAtualizacao" type="date" th:field="*{dataAtualizacao}"/>                <span th:if="${#fields.hasErrors('dataAtualizacao')}" th:errors="*{dataAtualizacao}" class="label label-danger"></span>  </div>     -->
 
-
-
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-2">
                         <label for="nome">Ativo:</label>
-                            <select   th:field="*{municipio.id}"  class="form-control" id="ativo" >
-                                <option  th:value = "0"  th:text="NÃO">NÃO</option>
-                                <option  th:value = "1"  th:text="SIM">SIM</option>
-                            </select>
+                        <select   class="form-control" id="ativo" >
+                            <option  th:value = "0"  th:text="NÃO">NÃO</option>
+                            <option  th:value = "1"  th:text="SIM">SIM</option>
+                        </select>
                         <div th:if="${#fields.hasErrors('ativo')}" th:errors="*{ativo}">
                         </div>
                     </div>
 
-                    <div class="form-group col-md-4">
-                        <button class="btn btn-primary" type="submit">Salvar</button>
-                    </div>
+                </div> <!-- Quarta Linha-->
 
+
+
+                <div class="row"> <!--Quinta Linha -->
+
+
+                    </div><!-- Quinta Linha -->
+
+                <div class="form-group col-md-4" >
+                    <button class="btn btn-primary" type="submit">Salvar</button>
                 </div>
-                </fieldset>
+
+            </fieldset>
 
         </form>
-            <hr/>
+        <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
 
-            <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
 
-            <hr/>
     </div>
 </main>
 
@@ -249,8 +260,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <script src="/js/jquery.mask.js"></script>
-
-
 
 
 

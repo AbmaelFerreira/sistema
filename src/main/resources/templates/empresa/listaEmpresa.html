@@ -4,10 +4,9 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, user-scalable=no"/>
 
-
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
-    <link rel="stylesheet" type="text/css" media="all"  href="/css/style.css" />
+    <link rel="stylesheet" type="text/css"  href="/css/style.css" />
 
     <title>Lista de Clientes</title>
 
@@ -30,17 +29,13 @@
                     <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/empresa/listar}">Clientes </a>
-                </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Clientes
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="Novo Cliente">
-                        <a class="dropdown-item" th:href="@{/empresas/cadastro}">Novo Cliente</a>
+                        <a class="dropdown-item" th:href="@{/empresa/cadastro}">Novo Cliente</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="@{/empresa/listar}">Lista de Clientes</a>
                     </div>
@@ -64,8 +59,8 @@
 <main>
 
     <div>
-        <a class="btn btn-primary"   th:href="@{/empresa/cadastro}">Novo Cliente</a>
-        <h4 class="text-field text-center">
+        <a class="btn btn-primary p-2 m-1"   th:href="@{/empresa/cadastro}">Novo Cliente</a>
+        <h4>
             Lista de Clientes
         </h4>
 
@@ -94,15 +89,15 @@
                 <!--<th scope="col">complemento</th>-->
                 <!--<th scope="col">CEP</th>-->
                 <!--<th scope="col">Bairro</th>-->
-                <th scope="col">Estado</th>
+<!--                <th scope="col">Estado</th>-->
                 <th scope="col">Municipio</th>
 
                 <th scope="col">CNPJ</th>
-                <th scope="col">Inscrição Estadual</th>
+<!--                <th scope="col">Inscrição Estadual</th>-->
                 <!--<th scope="col">Tipo de IE</th>-->
                 <th scope="col">Cadastro</th>
                 <!--<th scope="col">Atualização</th>-->
-                <th scope="col">Ativo</th>
+<!--                <th scope="col">Ativo</th>-->
                 <th scope="col">Ação</th>
             </tr>
             </thead>
@@ -124,15 +119,15 @@
                 <!--<td th:text="${empresa.complemento}">complemento</td>-->
                 <!--<td th:text="${empresa.cep}">CEP</td>-->
                 <!--<td th:text="${empresa.bairro}">Bairro</td>-->
-                <td th:text="${empresa.estado.nome}">Estado</td>
+<!--                <td th:text="${empresa.estado.nome}">Estado</td>-->
                 <td th:text="${empresa.municipio.nome}">Municipio</td>
                 <td th:text="${empresa.cnpj}">CNPJ</td>
-                <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>
+<!--                <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>-->
                 <!--<td th:text="${empresa.tipoIscricao}">Tipo de IE</td>-->
                 <!--<td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>-->
                 <td th:text="${empresa.dataCadastro}">Cadastro</td>
                 <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
-                <td th:text="${empresa.ativo}">Ativo</td>
+<!--                <td th:text="${empresa.ativo}">Ativo</td>-->
                 <td>
                     <a class="btn btn-xl btn-info" style="padding:3 30px;" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
                     <a class="btn btn-xl btn-danger" style="padding:3 30px;" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Excluir</a>
@@ -174,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <!--FIM DI MODAL-->
+                <!--FIM DO MODAL-->
 
             </tr>
         </table>

@@ -4,6 +4,7 @@ import com.sun.javafx.beans.IDProperty;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -19,10 +20,12 @@ public class Municipio  implements Serializable {
 
     @Column(nullable = false, length = 40)
     @NotBlank(message = "Favor informar um minicipio")
+    @NotNull(message = "Fovor informar um municipio válido")
     private String nome;
 
     @Column(nullable = false, length = 40)
     @NotBlank(message = "Favor informar um Estado")
+    @NotNull(message = "Favor informar um Estado")
     private int estado;
 
     @OneToMany(mappedBy = "municipio", cascade = CascadeType.ALL)

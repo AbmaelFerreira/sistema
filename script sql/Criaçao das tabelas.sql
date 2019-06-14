@@ -102,4 +102,4 @@ ADD CONSTRAINT `empresa_ibfk_2`
   ALTER TABLE `sistema`.`municipio` 
 CHANGE COLUMN `estado_id` `estado` INT(11) NOT NULL ;
 
-   
+   select * from empresa

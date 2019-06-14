@@ -6,10 +6,10 @@ body {
 
 
 h4{
-  
+
   font-family:"Calibri Light";
   color:#1b1e21;
-  font-size: 50px;
+  font-size: 30px;
   text-align: center;
 }
 
@@ -21,6 +21,6 @@ h4{
 
 form{
   margin: 15px;
-  color: red;
+
 
 }

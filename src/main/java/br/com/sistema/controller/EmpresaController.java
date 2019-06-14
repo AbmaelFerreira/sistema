@@ -10,12 +10,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("empresa")
 public class EmpresaController {
+
 
     @Autowired
     private EmpresaServico empresaServico;
@@ -26,6 +27,7 @@ public class EmpresaController {
             model.addAttribute("empresas", empresaServico.recuperar());
         return  new ModelAndView("/empresa/listaEmpresa", model);
     }
+
 
     /*Esse metodo redireciona para a pagina onde será adicionado as listas*/
     @GetMapping("/cadastro")
@@ -45,18 +47,37 @@ public class EmpresaController {
 
 
 
-    @PostMapping("/salvar")
-    public String salvar(@Valid @ModelAttribute("empresaCadastrada") Empresa empresaCadastrada, BindingResult result, RedirectAttributes attr){
+    @RequestMapping(value = "/salvar", method = RequestMethod.POST)
+    public String salvar(@Valid @ModelAttribute("empresa") Empresa empresa, BindingResult result, RedirectAttributes attr, ModelMap model)
+    {
 
         if (result.hasErrors()){
+
+            model.addAttribute("estados", empresaServico.recuperarEstado());
+            model.addAttribute("municipios", empresaServico.recuperarMunicipio());
             return  "/empresa/add";
         }
-        empresaServico.salvar(empresaCadastrada);
+
+        empresaServico.salvar(empresa);
         attr.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso");
-        return  "redirect:/empresa/listaEmpresa";
+        return  "redirect:/empresa/listar";
     }
 
-    @PutMapping("/salvar")
+
+
+    @GetMapping("/{id}/atualizar")
+    public ModelAndView preAtualizar(@PathVariable("id") long id, ModelMap model){
+
+        Empresa empresa = empresaServico.recuperarPorId(id);
+
+
+        model.addAttribute("empresa", empresa);
+        model.addAttribute("estados", empresaServico.recuperarEstado());
+        model.addAttribute("municipios", empresaServico.recuperarMunicipio());
+        return  new ModelAndView("/empresa/add", model);
+    }
+
+    @RequestMapping(value = "/salvar", method = RequestMethod.PUT)
     public String atualizar(@Valid @ModelAttribute("empresa") Empresa empresa, BindingResult result, RedirectAttributes attr){
         if (result.hasErrors()){
             return  "/empresa/add";
@@ -65,8 +86,5 @@ public class EmpresaController {
         attr.addFlashAttribute("mensagem", "Cliente atualizado com sucesso");
         return  "redirect:/empresa/listar";
     }
-
-
-
 
 }
