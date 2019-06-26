@@ -13,13 +13,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.validation.Valid;
 
 
-@Controller
+
 @RequestMapping("empresa")
+@Controller
 public class EmpresaController {
+
+
 
 
     @Autowired
     private EmpresaServico empresaServico;
+
+   /* @GetMapping("/login")
+    public ModelAndView login(ModelMap model){
+        model.addAttribute("empresas", empresaServico.recuperar());
+        return new ModelAndView("/empresa/listaEmpresa");
+    }
+*/
+
+    @GetMapping("/login")
+    public String login(){
+
+        return "login";
+    }
 
 
     @GetMapping("/listar")
@@ -85,6 +101,14 @@ public class EmpresaController {
         empresaServico.atualizar(empresa);
         attr.addFlashAttribute("mensagem", "Cliente atualizado com sucesso");
         return  "redirect:/empresa/listar";
+    }
+
+    @GetMapping("/{id}/remover")
+    public String remover(@PathVariable("id") long id,
+                          RedirectAttributes attr) {
+       empresaServico.excluir(id);
+        attr.addFlashAttribute("mensagem", "Cliente excluído com sucesso.");
+        return "redirect:/empresa/listar";
     }
 
 }

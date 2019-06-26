@@ -16,9 +16,10 @@
 <header>
     <!--<div class="container">-->
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/empresa/listar}">Clientes</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+    <nav  class="navbar navbar-expand-lg navbar-dark " style="background-color: #565656;">
+        <a  style="color: white;" class="navbar-brand"  th:href="@{/empresa/listar}">Início </a>
+
+        <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -26,33 +27,25 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clientes
+                    <a style="color: white;" class="nav-link" th:href="@{/empresa/listar}">
+                        Lista de Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
                     </a>
-
-                    <div class="dropdown-menu" aria-labelledby="Novo Cliente">
-                        <a class="dropdown-item" th:href="@{/empresa/cadastro}">Novo Cliente</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/empresa/listar}">Lista de Clientes</a>
-                    </div>
                 </li>
 
-                <!--<li class="nav-item">-->
-                <!--<a class="nav-link disabled" href="#">Desativado</a>-->
-                <!--</li>-->
+                <li class="nav-item active">
+                    <a style="color: white;" class="nav-link" th:href="@{/empresa/cadastro}">
+                        Adicionar Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
+                    </a>
+                </li>
             </ul>
 
-            <th:form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </th:form>
+            <form th:action="@{/logout}" method="post"  class="form-inline my-2 my-lg-0">
+
+                <button class="btn btn-xl btn-info my-2 my-sm-0" type="submit">Sair</button>
+            </form>
         </div>
     </nav>
-    <!--</div> conteiner desfeito-->
+
 </header>
 
 
@@ -76,8 +69,8 @@
 
         <table class="table table-hover table-bordered table-sm table-responsive-md text-center table-color">
 
-            <thead class="thead-dark">
-            <tr>
+            <thead style="background: #565656;" > <!--class="thead-dark"-->
+            <tr style="color: white;">
                 <th class="d-none d-lg-none"  scope="col">Código</th>
                 <th class="table-color" scope="col">Razão Social</th>
                 <!--<th scope="col">Fantasia</th>-->
@@ -129,10 +122,49 @@
                 <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
 <!--                <td th:text="${empresa.ativo}">Ativo</td>-->
                 <td>
-                    <a class="btn btn-xl btn-info" style="padding:3 30px;" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
-                    <a class="btn btn-xl btn-danger" style="padding:3 30px;" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Excluir</a>
+                    <a class="btn btn-xl btn-info" style="padding:3 30px; color: white" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
+                    <a class="btn btn-xl btn-danger" style="padding:3 30px; color: white"   data-toggle="modal" th:attr="data-target='#modalExcluir'+${empresa.id}" >Excluir</a>
                 </td>
-                <!-- Modal -->
+
+                    <!-- Modal de exclusão-->
+
+                    <div class="modal fade" th:id="modalExcluir +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalExcluir">Excluir Cliente </h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+
+                                    <form>
+
+                                        <div class="row">
+                                            <p >Deseja excluir o Cliente:&nbsp; </p> <h6 th:text="${empresa.nome}"> </h6> <p>Permanentemente do sistema?</p>
+                                        </div>
+
+                                        <a type="button" class="btn btn-primary" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Sim</a>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Não</button>
+
+
+
+                                    </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Fim do modalExcluir-->
+
+
+                <!-- Modal Dados da Empresa -->
 
                 <div class="modal fade" th:id="modalExemplo +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -170,10 +202,12 @@
                     </div>
                 </div>
                 <!--FIM DO MODAL-->
-
             </tr>
+
+
         </table>
     </div>
+
 
 
 
@@ -191,6 +225,8 @@
     <hr/>
     <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
 </main>
+
+
 
 <hr/>
 <footer class="footer">

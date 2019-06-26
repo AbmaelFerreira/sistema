@@ -24,12 +24,15 @@ public class ConfiguracaoSpringMvc  extends WebMvcConfigurerAdapter {
         return templateEngine;
     }
 
+
     public void addViewControllers (ViewControllerRegistry registry){
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/empresa/home").setViewName("home");
+        registry.addViewController("/css/style").setViewName("home");
     }
 
-    @Override
+    /*@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(
 
@@ -42,7 +45,7 @@ public class ConfiguracaoSpringMvc  extends WebMvcConfigurerAdapter {
                         "classpath:/static/css/",
                         "classpath:/static/js/");
     }
-
+*/
     protected Filter[] getSerFilters(){
 
         return new Filter[] {new OpenEntityManagerInViewFilter()};

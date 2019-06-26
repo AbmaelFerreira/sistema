@@ -13,11 +13,10 @@
 
 <body>
 <header>
-    <!--<div class="container">-->
+    <nav  class="navbar navbar-expand-lg navbar-dark " style="background-color: #565656;">
+        <a  style="color: white;" class="navbar-brand"  th:href="@{/empresa/listar}">Início </a>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/empresa/listar}">Clientes</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
+        <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -25,37 +24,24 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/empresa/listar}">Inicio<span class="sr-only">(empresa/listaEmpresa.html)</span></a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/empresa/listar}">Clientes </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Clientes
+                    <a style="color: white;" class="nav-link" th:href="@{/empresa/listar}">
+                        Lista de Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
                     </a>
-
-                    <div class="dropdown-menu" aria-labelledby="Novo Cliente">
-                        <a class="dropdown-item" th:href="@{/empresas/cadastro}">Novo Cliente</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" th:href="@{/empresa/listar}">Lista de Clientes</a>
-                    </div>
                 </li>
 
-                <!--<li class="nav-item">-->
-                <!--<a class="nav-link disabled" href="#">Desativado</a>-->
-                <!--</li>-->
+                <li class="nav-item active">
+                    <a style="color: white;" class="nav-link" th:href="@{/empresa/cadastrar}">
+                        Adicionar Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
+                    </a>
+                </li>
             </ul>
 
-            <th:form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Pesquisar"/>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pesquisar</button>
-            </th:form>
+            <form th:action="@{/logout}" method="post" class="form-inline my-2 my-lg-0">
+
+                <button class="btn btn-xl btn-info my-2 my-sm-0" type="submit">Sair</button>
+            </form>
         </div>
     </nav>
-    <!--</div> conteiner desfeito-->
 </header>
 <main>
 
@@ -65,9 +51,6 @@
 
     <hr/>
 
-        <h4>
-            Home
-        </h4>
 
         <div th:if="${mensagem != null}">
             <div class="alert alert-info" role="alert">
@@ -76,10 +59,10 @@
         </div>
 
 
-    <div th:if="${#lists.isEmpty(empresas)}">
+    <div>
         <div class="alert alert-info" role="alert">
             <span class="glyphicon glyphicon-exclamation-sign"></span>
-            0 Empresas cadastradas!
+            Visitas de Clientes para Hoje!!!
         </div>
     </div>
 
