@@ -8,29 +8,33 @@
     <link rel="stylesheet" type="text/css" media="all" href="/css/style.css" />
     <link rel="shortcut icon" th:href="@{/images/favicon.ico}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}" />
-    <title>Lista de Clientes</title>
+
+    <title>Inicio - Home</title>
 </head>
 
 <body>
 <header>
+
     <nav  class="navbar navbar-expand-lg navbar-dark " style="background-color: #565656;">
-        <a  style="color: white;" class="navbar-brand"  th:href="@{/empresa/listar}">Início </a>
+        <a th:href="@{/empresa/home}">
+            Início
+        </a> <!--   class="navbar-brand"  style="color: white;"-->
 
         <button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+        <div class="collapse navbar-collapse p-1" id="conteudoNavbarSuportado">
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item active">
-                    <a style="color: white;" class="nav-link" th:href="@{/empresa/listar}">
-                        Lista de Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
+                <li class="nav-item active p-1">
+                    <a th:href="@{/empresa/listar}">
+                        Lista de Clientes <span class="sr-only">(empresa/listaEmpresa.html)</span> <!--class="nav-link"-->
                     </a>
                 </li>
 
-                <li class="nav-item active">
-                    <a style="color: white;" class="nav-link" th:href="@{/empresa/cadastrar}">
+                <li class="nav-item active p-1">
+                    <a  th:href="@{/empresa/cadastro}">
                         Adicionar Clientes<span class="sr-only">(empresa/listaEmpresa.html)</span>
                     </a>
                 </li>
