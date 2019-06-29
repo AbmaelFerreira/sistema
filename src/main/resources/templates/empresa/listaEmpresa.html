@@ -55,159 +55,167 @@
 
     <div>
         <a class="btn btn-primary p-2 m-1"   th:href="@{/empresa/cadastro}">Novo Cliente</a>
-        <h4>
-            Lista de Clientes
-        </h4>
+
+<!--        <h4>-->
+<!--            Lista de Clientes-->
+<!--        </h4>-->
 
     </div>
-    <div th:if="${empresas != null}">
+
+    <div class="card">
+        <h5 class="card-header">Listagem de Clientes </h5>
+        <div class="card-body">
+            <h5 class="card-title"><!--Alguma informação de sub titulo--></h5>
+            <div th:if="${empresas != null}">
 
 
-        <div th:if="${mensagem != null}">
-            <div class="alert alert-info" role="alert">
-                <span th:text="${mensagem == null ?' ' : mensagem}">mensagem</span>
-            </div>
-        </div>
-
-        <table class="table table-hover table-bordered table-sm table-responsive-md text-center table-color">
-
-            <thead style="background: #565656;" > <!--class="thead-dark"-->
-            <tr style="color: white;">
-                <th class="d-none d-lg-none"  scope="col">Código</th>
-                <th class="table-color" scope="col">Razão Social</th>
-                <!--<th scope="col">Fantasia</th>-->
-                <th class ="d-none d-md-block d-xl-none" scope="col">Pessoa</th>
-                <th scope="col">Telefone</th>
-
-                <!--<th scope="col">Rua</th>-->
-                <!--<th scope="col">Número</th>-->
-                <!--<th scope="col">complemento</th>-->
-                <!--<th scope="col">CEP</th>-->
-                <!--<th scope="col">Bairro</th>-->
-<!--                <th scope="col">Estado</th>-->
-                <th scope="col">Municipio</th>
-
-                <th scope="col">CNPJ</th>
-<!--                <th scope="col">Inscrição Estadual</th>-->
-                <!--<th scope="col">Tipo de IE</th>-->
-                <th scope="col">Cadastro</th>
-                <!--<th scope="col">Atualização</th>-->
-<!--                <th scope="col">Ativo</th>-->
-                <th scope="col">Ação</th>
-            </tr>
-            </thead>
-
-            <tr th:each="empresa : ${empresas}" >
-
-                <td class="d-none d-lg-none"   th:text="${empresa.id}">Codigo</td>
-                <td data-toggle="modal" th:attr="data-target='#modalExemplo'+${empresa.id}" th:text="${empresa.nome}"></td>
-
-
-                <!--th:href="@{/empresa/{empresaid}/atualizar(empresaid=${empresa.id})}"-->
-
-                <!--<td th:text="${empresa.fantasia}">Fantasia</td>-->
-                <td class ="d-none d-md-block d-xl-none"  th:text="${empresa.pessoa}">Pessoa</td>
-                <td th:text="${empresa.fone}">Telefone</td>
-
-                <!--<td th:text="${empresa.rua}">Rua</td>-->
-                <!--<td th:text="${empresa.numero}">Número</td>-->
-                <!--<td th:text="${empresa.complemento}">complemento</td>-->
-                <!--<td th:text="${empresa.cep}">CEP</td>-->
-                <!--<td th:text="${empresa.bairro}">Bairro</td>-->
-<!--                <td th:text="${empresa.estado.nome}">Estado</td>-->
-                <td th:text="${empresa.municipio.nome}">Municipio</td>
-                <td th:text="${empresa.cnpj}">CNPJ</td>
-<!--                <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>-->
-                <!--<td th:text="${empresa.tipoIscricao}">Tipo de IE</td>-->
-                <!--<td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>-->
-                <td th:text="${empresa.dataCadastro}">Cadastro</td>
-                <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
-<!--                <td th:text="${empresa.ativo}">Ativo</td>-->
-                <td>
-                    <a class="btn btn-xl btn-info" style="padding:3 30px; color: white" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
-                    <a class="btn btn-xl btn-danger" style="padding:3 30px; color: white"   data-toggle="modal" th:attr="data-target='#modalExcluir'+${empresa.id}" >Excluir</a>
-                </td>
-
-                    <!-- Modal de exclusão-->
-
-                    <div class="modal fade" th:id="modalExcluir +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalExcluir">Excluir Cliente </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-                                <div class="modal-body">
-
-                                    <form>
-
-                                        <div class="row">
-                                            <p >Deseja excluir o Cliente:&nbsp; </p> <h6 th:text="${empresa.nome}"> </h6> <p>Permanentemente do sistema?</p>
-                                        </div>
-
-                                        <a type="button" class="btn btn-primary" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Sim</a>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Não</button>
-
-
-
-                                    </form>
-                                </div>
-
-                                <div class="modal-footer">
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Fim do modalExcluir-->
-
-
-                <!-- Modal Dados da Empresa -->
-
-                <div class="modal fade" th:id="modalExemplo +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                  <form >  <!---->
-                                    <div class="row">
-
-                                        <div class="form-group col-md-4">
-                                            <label th:for="cliente">Cliente: </label>
-                                            <label th:for="nome" th:text="${empresa.nome}"> </label>
-
-
-
-                                            <!--<input class="form-control" id="campo" type="text" th:text="${empresa.nome}" />-->
-                                            <!--<input class="form-control" id="empresaiD" type="text" th:field="*{id}"/>-->
-                                            <!--<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>-->
-                                        </div>
-                                    </div>
-
-                                </form>
-
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <!--<td th:text="${empresa.nome}"></td>-->
-                            </div>
-                            <div class="modal-footer">
-                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
-                            </div>
-                        </div>
+                <div th:if="${mensagem != null}">
+                    <div class="alert alert-info" role="alert">
+                        <span th:text="${mensagem == null ?' ' : mensagem}">mensagem</span>
                     </div>
                 </div>
-                <!--FIM DO MODAL-->
-            </tr>
+
+                <table class="table table-hover table-bordered table-sm table-responsive-md text-center table-color">
+
+                    <thead style="background: #565656;" > <!--class="thead-dark"-->
+                    <tr style="color: white;">
+                        <th class="d-none d-lg-none"  scope="col">Código</th>
+                        <th class="table-color" scope="col">Razão Social</th>
+                        <!--<th scope="col">Fantasia</th>-->
+                        <th class ="d-none d-md-block d-xl-none" scope="col">Pessoa</th>
+                        <th scope="col">Telefone</th>
+
+                        <!--<th scope="col">Rua</th>-->
+                        <!--<th scope="col">Número</th>-->
+                        <!--<th scope="col">complemento</th>-->
+                        <!--<th scope="col">CEP</th>-->
+                        <!--<th scope="col">Bairro</th>-->
+        <!--                <th scope="col">Estado</th>-->
+                        <th scope="col">Municipio</th>
+
+                        <th scope="col">CNPJ</th>
+        <!--                <th scope="col">Inscrição Estadual</th>-->
+                        <!--<th scope="col">Tipo de IE</th>-->
+                        <th scope="col">Cadastro</th>
+                        <!--<th scope="col">Atualização</th>-->
+        <!--                <th scope="col">Ativo</th>-->
+                        <th scope="col">Ação</th>
+                    </tr>
+                    </thead>
+
+                    <tr th:each="empresa : ${empresas}" >
+
+                        <td class="d-none d-lg-none"   th:text="${empresa.id}">Codigo</td>
+                        <td data-toggle="modal" th:attr="data-target='#modalExemplo'+${empresa.id}" th:text="${empresa.nome}"></td>
 
 
-        </table>
+                        <!--th:href="@{/empresa/{empresaid}/atualizar(empresaid=${empresa.id})}"-->
+
+                        <!--<td th:text="${empresa.fantasia}">Fantasia</td>-->
+                        <td class ="d-none d-md-block d-xl-none"  th:text="${empresa.pessoa}">Pessoa</td>
+                        <td th:text="${empresa.fone}">Telefone</td>
+
+                        <!--<td th:text="${empresa.rua}">Rua</td>-->
+                        <!--<td th:text="${empresa.numero}">Número</td>-->
+                        <!--<td th:text="${empresa.complemento}">complemento</td>-->
+                        <!--<td th:text="${empresa.cep}">CEP</td>-->
+                        <!--<td th:text="${empresa.bairro}">Bairro</td>-->
+        <!--                <td th:text="${empresa.estado.nome}">Estado</td>-->
+                        <td th:text="${empresa.municipio.nome}">Municipio</td>
+                        <td th:text="${empresa.cnpj}">CNPJ</td>
+        <!--                <td th:text="${empresa.inscricaoEstadual}">Inscrição Estadual</td>-->
+                        <!--<td th:text="${empresa.tipoIscricao}">Tipo de IE</td>-->
+                        <!--<td th:text="${#calendars.format(empresa.dataCadastro,'dd/MM/yyyy')}">Cadastro</td>-->
+                        <td th:text="${empresa.dataCadastro}">Cadastro</td>
+                        <!--<td th:text="${#calendars.format(empresa.dataAtualizacao)}">Atualização</td>-->
+        <!--                <td th:text="${empresa.ativo}">Ativo</td>-->
+                        <td>
+                            <a class="btn btn-xl btn-info" style="padding:3 30px; color: white" th:href="@{/empresa/{id}/atualizar(id=${empresa.id})}">Editar</a>
+                            <a class="btn btn-xl btn-danger" style="padding:3 30px; color: white"   data-toggle="modal" th:attr="data-target='#modalExcluir'+${empresa.id}" >Excluir</a>
+                        </td>
+
+                            <!-- Modal de exclusão-->
+
+                            <div class="modal fade" th:id="modalExcluir +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalExcluir">Excluir Cliente </h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                            <form>
+
+                                                <div class="row">
+                                                    <p >Deseja excluir o Cliente:&nbsp; </p> <h6 th:text="${empresa.nome}"> </h6> <p>Permanentemente do sistema?</p>
+                                                </div>
+
+                                                <a type="button" class="btn btn-primary" th:href="@{/empresa/{id}/remover(id=${empresa.id})}">Sim</a>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"  >Não</button>
+
+
+
+                                            </form>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Fim do modalExcluir-->
+
+
+                        <!-- Modal Dados da Empresa -->
+
+                        <div class="modal fade" th:id="modalExemplo +${empresa.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                          <form >  <!---->
+                                            <div class="row">
+
+                                                <div class="form-group col-md-4">
+                                                    <label th:for="cliente">Cliente: </label>
+                                                    <label th:for="nome" th:text="${empresa.nome}"> </label>
+
+
+
+                                                    <!--<input class="form-control" id="campo" type="text" th:text="${empresa.nome}" />-->
+                                                    <!--<input class="form-control" id="empresaiD" type="text" th:field="*{id}"/>-->
+                                                    <!--<span th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>-->
+                                                </div>
+                                            </div>
+
+                                        </form>
+
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!--<td th:text="${empresa.nome}"></td>-->
+                                    </div>
+                                    <div class="modal-footer">
+                                         <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--FIM DO MODAL-->
+                    </tr>
+
+
+                </table>
+            </div>
+        </div>
     </div>
 
 

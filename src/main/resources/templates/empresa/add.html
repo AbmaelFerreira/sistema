@@ -57,10 +57,10 @@
             <!--<h4 class=" text-light bg-dark"> Novo Cliente </h4><hr/>-->
 
 
-            <div class="card">
-                <h5 class="card-header">Cadastro de Clientes </h5>
-                <div class="card-body">
-                    <h5 class="card-title">Título especial</h5>
+                <div class="card">
+                    <h5 class="card-header">Cadastro de Clientes </h5>
+                    <div class="card-body">
+                        <h5 class="card-title">Dados da Empresa</h5>
 
                         <form th:action="@{/empresa/salvar}" th:method="${empresa.id} == null ? post : put" th:object="${empresa}">
                            <input id="id" type="hidden" th:field="*{id}"/>
@@ -103,17 +103,46 @@
 
                                 <div class="form-group col-md-2">
 
-                                    <label for="telefone">Fone:</label>
-                                    <input  class="form-control"  style="min-width:100px;"  data-mask="(00) 00000-0000" placeholder="Telefone" name="telefone" id="telefone" type="text" th:field="*{fone}"/>
-                                    <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('fone')}" th:errors="*{fone}"> </div>
+                                    <label th:for="cnpj">CNPJ:</label>
+                                    <input class="form-control" data-mask="00.000.000/-0000-00" id="cnpj" th:name="cnpj" type="text" th:field="*{cnpj}"/>
+                                    <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('cnpj')}" th:errors="*{cnpj}"> </div>
                                 </div>
 
 
                             </div><!--Segunda Linha -->
 
+                            <div class="row"> <!--Terceira Linha-->
+
+                                <div class="form-group col-md-2">
+
+                                    <label for="nome">I.E:</label>
+                                    <input class="form-control" data-mask="00.0000.000-0" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
+                                    <div th:if="${#fields.hasErrors('inscricaoEstadual')}" th:errors="*{inscricaoEstadual}"></div>
+                                </div>
+
+                                <div class="form-group col-xs-2">
+
+                                    <label for="nome">Tipo Inscricao:</label>
+                                    <input class="form-control" id="tipoIscricao" type="text" th:field="*{tipoIscricao}"/>
+                                    <div th:if="${#fields.hasErrors('tipoIscricao')}" th:errors="*{tipoIscricao}"> </div>
+                                </div>
 
 
-                            <div class="row"> <!--Terceira Linha -->
+                                <div class="form-group col-md-2">
+                                    <label for="nome">Ativo:</label>
+                                    <select   class="form-control" id="ativo" >
+                                        <option  th:value = "0"  th:text="SIM">SIM</option>
+                                        <option  th:value = "1"  th:text="NÃO">NÃO</option>
+                                    </select>
+                                    <div th:if="${#fields.hasErrors('ativo')}" th:errors="*{ativo}">
+                                    </div>
+                                </div>
+
+                            </div> <!-- Terceira Linha-->
+
+                            <h5 class="card-title">Endereço</h5>
+
+                            <div class="row"> <!--Quarta Linha -->
 
                                 <div class="form-group col-sm-8">
 
@@ -147,13 +176,10 @@
                                     <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('cep')}" th:errors="*{cep}"></div>
                                 </div>
 
-                            </div><!--Terceira Linha-->
+                            </div><!--Quarta Linha-->
 
 
-                            <div class="row"> <!--Quarta Linha -->
-
-
-
+                            <div class="row"> <!--Quinta Linha -->
 
                                 <div class="form-group-lg col-md-6">
 
@@ -181,76 +207,27 @@
                                     </select>
                                 </div>
 
-                                <div class="form-group col-md-2">
-
-                                    <label th:for="cnpj">CNPJ:</label>
-                                    <input class="form-control" data-mask="00.000.000/-0000-00" id="cnpj" th:name="cnpj" type="text" th:field="*{cnpj}"/>
-                                    <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('cnpj')}"
-                                         th:errors="*{cnpj}">
-
-                                    </div>
-                                </div>
-
-                            </div><!--Quarta  Linha-->
-
-
-                            <div class="row"> <!--Quinta Linha-->
-
-
-
 
 
                                 <div class="form-group col-md-2">
 
-                                    <label for="nome">I.E:</label>
-                                    <input class="form-control" data-mask="00.0000.000-0" id="inscricaoEstadual" type="text" th:field="*{inscricaoEstadual}"/>
-                                    <div th:if="${#fields.hasErrors('inscricaoEstadual')}"
-                                         th:errors="*{inscricaoEstadual}">
-
-                                    </div>
+                                    <label for="telefone">Fone:</label>
+                                    <input  class="form-control"  style="min-width:100px;"  data-mask="(00) 00000-0000" placeholder="Telefone" name="telefone" id="telefone" type="text" th:field="*{fone}"/>
+                                    <div class="alert alert-info" role="alert" th:if="${#fields.hasErrors('fone')}" th:errors="*{fone}"> </div>
                                 </div>
 
-                                <div class="form-group col-xs-2">
+                            </div><!--Quinta  Linha-->
 
-                                    <label for="nome">Tipo Inscricao:</label>
-                                    <input class="form-control" id="tipoIscricao" type="text" th:field="*{tipoIscricao}"/>
-                                    <div th:if="${#fields.hasErrors('tipoIscricao')}"
-                                         th:errors="*{tipoIscricao}">
-
-                                    </div>
+                            <div class="row"> <!--Sexta  Linha-->
+                                <div class="form-group col-md-2" >
+                                    <button class="btn btn-primary" type="submit">Salvar</button>
                                 </div>
-
-
-                                <div class="form-group col-md-2">
-                                    <label for="nome">Ativo:</label>
-                                    <select   class="form-control" id="ativo" >
-                                          <option  th:value = "0"  th:text="SIM">SIM</option>
-                                          <option  th:value = "1"  th:text="NÃO">NÃO</option>
-                                    </select>
-                                    <div th:if="${#fields.hasErrors('ativo')}" th:errors="*{ativo}">
-                                    </div>
-                                </div>
-
-                            </div> <!-- Quarta Linha-->
-
-
-
-                            <div class="row"> <!--Quinta Linha -->
-
-
-                                </div><!-- Quinta Linha -->
-
-                            <div class="form-group col-md-4" >
-                                <button class="btn btn-primary" type="submit">Salvar</button>
-                            </div>
-
-                           <!--</fieldset>-->
-
+                            </div> <!-- Sexta Linha -->
                         </form>
-                </div> <!--card-body -->
-            </div> <!--card-header -->
+                    </div> <!--card-body -->
+                </div> <!--card-header -->
 
-        <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
+                <a class="btn btn-light" th:href=" @{/empresa/listar}">Voltar</a>
 
 
     </div>
